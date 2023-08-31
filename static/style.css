@@ -1,5 +1,5 @@
 body{
-    background: black;
+    background: rgb(3, 3, 51);
     color: white;
     margin: 0;
     padding: 0;
@@ -14,7 +14,7 @@ nav {
     display: flex;
     position: fixed;
     width: 100%;
-    background-color: white;
+    background-color: rgb(77, 192, 77);
     color: black;
     padding-top: 20px;
     padding-bottom: 7px;
