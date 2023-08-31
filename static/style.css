@@ -1,0 +1,31 @@
+body{
+    background: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    color: black;
+    padding-top: 20px;
+    padding-bottom: 7px;
+}
+
+.left-nav {
+    margin-left: 20px;
+}
+
+.right-nav {
+    position: absolute;
+    right: 20px;
+    text-align: center;
+}
