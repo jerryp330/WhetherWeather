@@ -25,6 +25,7 @@ nav {
     padding-top: 20px;
     padding-bottom: 7px;
     margin-top: 0;
+    top: 0;
 }
 
 .left-nav {
@@ -37,6 +38,23 @@ nav {
     text-align: center;
 }
 
-h1 {
-    color: red;
+#front-page {
+    position:relative;
+    color: white;
+    margin-top: 230px;
+    text-align: center;
+}
+
+button {
+    background-color: rgb(77, 192, 77);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    font-size: 24px;
+}
+
+#front-page button {
+    margin-top: 70px;
 }
