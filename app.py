@@ -11,13 +11,15 @@ country_reponse = requests.get("https://restcountries.com/v3.1/all?fields=name,f
 # Retrieving data for the current country. 
 # FUTURE IDEA: this api provides the continent for which the country is from, so I can make the multiple choice easier/harder
 # based on choosing how many options are from the same continent
-current_country = {      #stores the data of the random country obtained. Will be updated with the country's info.
+
+def gen_city(): 
+
+    current_country = {      #stores the data of the random country obtained. Will be updated with the country's info.
     "name": "",
     "flag": "",
     "capital": ""
-}
+    }
 
-def gen_city(): 
     if country_reponse.status_code == 200:
         data = country_reponse.json()
     else:
@@ -26,7 +28,10 @@ def gen_city():
     random_country = random.choice(data)
     country_name = random_country.get("name", {}).get("common","")
     flag_url = random_country.get("flags", {}).get("png", "")
-    capital_name = random_country.get("capital", "")[0]
+    try:
+        capital_name = random_country.get("capital", "")[0]
+    except IndexError:
+        return("No capital city for this country.")
 
     if country_name:
         current_country["name"] = country_name
@@ -41,19 +46,19 @@ def gen_city():
     else: 
         current_country["capital"] = ""
 
+    return(current_country)
+
 # Fetching data from the weather API for the current city's weather
-current_weather = {
+def get_weather():
+    current_country = gen_city()
+    current_weather = {
     "temp": "",
     "humidity": "",
     "sky": "",
     "timezone": "",
-    #"name": ""
-}
-
-
-
-def get_weather():
-    gen_city()
+    "city": "",
+    "country": ""
+    }
 
     if current_country["capital"] != "":
         weather_response = requests.get(
@@ -69,7 +74,8 @@ def get_weather():
     current_weather["humidity"] = weather_data["main"]["humidity"]
     current_weather["sky"] = weather_data["weather"][0]["description"]
     current_weather["timezone"] = weather_data["timezone"]
-    #current_weather["name"] = weather_data["name"]
+    current_weather["name"] = weather_data["name"]
+    current_weather["country"] = current_country["name"]
 
 
 """
