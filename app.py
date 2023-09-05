@@ -93,7 +93,7 @@ def home():
 
 @app.route("/play")
 def play():
-    return render_template('play.html')
+    return render_template('play.html', current_weather = get_weather(), wrong_answers = gen_answers())
 
 
 if __name__ == "__main__":
