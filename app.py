@@ -8,6 +8,16 @@ app = Flask(__name__)
 api_key = "e35a3b728a550599387fef9ebdd3ff21"
 country_reponse = requests.get("https://restcountries.com/v3.1/all?fields=name,flags,capital")
 
+#Global variables
+current_weather = {
+"temp": "",
+"humidity": "",
+"sky": "",
+"timezone": "",
+"city": "",
+"country": ""
+}
+
 # Retrieving data for the current country. 
 # FUTURE IDEA: this api provides the continent for which the country is from, so I can make the multiple choice easier/harder
 # based on choosing how many options are from the same continent
@@ -48,15 +58,21 @@ def gen_city():
 
     return(current_country)
 
+def gen_answers():
+    answers = []
+    answers.append(current_weather["country"])
+    i = 0
+    while i < 4:
+        new_country = gen_city()["name"]
+        if new_country not in answers:
+            answers.append(new_country)
+            i += 1
+    random.shuffle(answers)
+    return(answers)
+
+
 # Fetching data from the weather API for the current city's weather
-current_weather = {
-"temp": "",
-"humidity": "",
-"sky": "",
-"timezone": "",
-"city": "",
-"country": ""
-}
+
 def get_weather():
     current_country = gen_city()
 
@@ -77,18 +93,11 @@ def get_weather():
     current_weather["name"] = weather_data["name"]
     current_weather["country"] = current_country["name"]
 
-#might have to make current_weather a global variable
-def gen_answers():
-    answers = []
-    answers.append(current_weather["country"])
-    i = 0
-    while i < 4:
-        new_country = gen_city()["name"]
-        if new_country not in answers:
-            answers.append(new_country)
-            i += 1
-    random.shuffle(answers)
+    answers = gen_answers()
     return(answers)
+
+#might have to make current_weather a global variable
+
 
 @app.route("/")
 def home():
@@ -96,7 +105,7 @@ def home():
 
 @app.route("/play")
 def play():
-    return render_template('play.html', current_weather = current_weather, answers = gen_answers())
+    return render_template('play.html', current_weather = current_weather, answers = get_weather())
 
 
 if __name__ == "__main__":
