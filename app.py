@@ -79,12 +79,15 @@ def get_weather():
 
     return(current_weather)
 
+#might have to make current_weather a global variable
 def gen_answers():
     answers = []
     i = 0
     while i < 4:
-        answers.append(gen_city()["name"])
-        i += 1
+        new_country = gen_city()["name"]
+        if new_country not in answers:
+            answers.append(new_country)
+            i += 1
     return(answers)
 
 @app.route("/")
