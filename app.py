@@ -49,16 +49,16 @@ def gen_city():
     return(current_country)
 
 # Fetching data from the weather API for the current city's weather
+current_weather = {
+"temp": "",
+"humidity": "",
+"sky": "",
+"timezone": "",
+"city": "",
+"country": ""
+}
 def get_weather():
     current_country = gen_city()
-    current_weather = {
-    "temp": "",
-    "humidity": "",
-    "sky": "",
-    "timezone": "",
-    "city": "",
-    "country": ""
-    }
 
     if current_country["capital"] != "":
         weather_response = requests.get(
@@ -77,17 +77,17 @@ def get_weather():
     current_weather["name"] = weather_data["name"]
     current_weather["country"] = current_country["name"]
 
-    return(current_weather)
-
 #might have to make current_weather a global variable
 def gen_answers():
     answers = []
+    answers.append(current_weather["country"])
     i = 0
     while i < 4:
         new_country = gen_city()["name"]
         if new_country not in answers:
             answers.append(new_country)
             i += 1
+    random.shuffle(answers)
     return(answers)
 
 @app.route("/")
@@ -96,7 +96,7 @@ def home():
 
 @app.route("/play")
 def play():
-    return render_template('play.html', current_weather = get_weather(), wrong_answers = gen_answers())
+    return render_template('play.html', current_weather = current_weather, answers = gen_answers())
 
 
 if __name__ == "__main__":

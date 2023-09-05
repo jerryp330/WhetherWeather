@@ -9,14 +9,11 @@
         <p>Timezone: {{ current_weather.timezone }}</p>
     </div>
 
-    <!-- Answer choices and quiz questions-->
-    {% set answer_choices = [current_weather["name"], wrong_answers[0], wrong_answers[1], wrong_answers[2], wrong_answers[3]] %}
-    {% random.shuffle(answer_choices) %}
-
+    <!-- quiz questions -->
     <form id = "quiz-form">
         <h2> Which country?</h2>
 
-        {% for choice in answer_choices %}
+        {% for choice in answers %}
         <label>
             <input type = "radio" name = "answer" value = "{{ choice }}">
             {{ choice }} 
