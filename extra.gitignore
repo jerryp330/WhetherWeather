@@ -1,0 +1,4 @@
+# Generate the quiz questions.
+def gen_questions():
+    quiz_data = get_weather()
+    question = ("")

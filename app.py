@@ -77,6 +77,15 @@ def get_weather():
     current_weather["name"] = weather_data["name"]
     current_weather["country"] = current_country["name"]
 
+    return(current_weather)
+
+def gen_answers():
+    answers = []
+    i = 0
+    while i < 4:
+        answers.append(gen_city()["name"])
+        i += 1
+    return(answers)
 
 @app.route("/")
 def home():
