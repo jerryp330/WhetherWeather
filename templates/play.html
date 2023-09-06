@@ -21,4 +21,29 @@
         {% endfor %}
         <input type="submit" value="Submit">
     </form>
+    
+    <script>
+        const correctAnswer = "{{ current_weather.country }}";
+        
+        var quiz = document.getElementById("quiz-form");
+        quiz.addEventListener("submit", formSubmission);
+
+        function formSubmission(e) {
+            e.preventDefault();
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+            
+            if (selectedAnswer) {
+                const userAnswer = selectedAnswer.value;
+
+                if (userAnswer === correctAnswer) {
+                    alert('Correct! You guessed the right country.');
+                } else {
+                    alert(`Incorrect. The correct answer is ${correctAnswer}.`);
+                }
+            } else {
+                alert('Please select an answer.');
+            }
+        }
+    </script>
+
 {% endblock %}
