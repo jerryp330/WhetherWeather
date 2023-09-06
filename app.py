@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import requests
 import random
+import datetime 
 
 app = Flask(__name__)
 
@@ -89,10 +90,17 @@ def get_weather():
     current_weather["temp"] = weather_data["main"]["temp"]
     current_weather["humidity"] = weather_data["main"]["humidity"]
     current_weather["sky"] = weather_data["weather"][0]["description"]
-    current_weather["timezone"] = weather_data["timezone"]
+    #current_weather["timezone"] = weather_data["timezone"]
     current_weather["name"] = weather_data["name"]
     current_weather["country"] = current_country["name"]
 
+    # Convert time offset to city's actual time.
+    time_offset = weather_data["timezone"]
+    utc_time = datetime.datetime.utcnow()
+    current_time = utc_time + datetime.timedelta(seconds=time_offset)
+    formatted_time = current_time.strftime("%H:%M")
+    current_weather["timezone"] = formatted_time
+    
     answers = gen_answers()
     return(answers)
 
