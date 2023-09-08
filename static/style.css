@@ -76,7 +76,20 @@ button {
     margin-top: 75px;
 }
 
-#next-button {
-    margin-top: 50px;
+.play-buttons{
     padding: 5px 10px;
+}
+#submit-button {
+    margin-top: 20px;
+    background-color: rgb(77, 192, 77);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    font-size: 20px;
+    font-weight: lighter;
+}
+#next-button {
+    margin-top: 0px;
+    font-size: inherit;
 }

@@ -11,18 +11,24 @@
         </div>
 
         <!-- quiz questions -->
-        <form id = "quiz-form">
-            <h2> So... which country is this weather data from?</h2>
+        <form id="quiz-form">
+            <h2>So... which country is this weather data from?</h2>
 
-            {% for choice in answers %}
-            <label>
-                <input type = "radio" name = "answer" value = "{{ choice }}">
-                {{ choice }} 
-            </label>
-            {% endfor %}
-            <input type="submit" value="Submit">
+            <!-- Wrap the answer choices in a <div> element -->
+            <div id="answer-choices">
+                {% for choice in answers %}
+                <label>
+                    <input type="radio" name="answer" value="{{ choice }}">
+                    {{ choice }}
+                </label>
+                {% endfor %}
+            </div>
+
+            <!-- Move the submit button below the answer choices -->
+            <input class = "play-buttons" id = "submit-button" type="submit" value="Submit">
         </form>
-        <div id = "result-message"> 
+
+        <div class = "play-buttons" id = "result-message"> 
 
         </div>
         <button id = "next-button"> Next Question </button>
