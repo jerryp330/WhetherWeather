@@ -21,12 +21,14 @@
         {% endfor %}
         <input type="submit" value="Submit">
     </form>
+    <button id = "next-button"> Next Question </button>
     <div id = "result-message"> 
 
     </div>
     <script>
         const correctAnswer = "{{ current_weather.country }}";
         const resultMessage = document.getElementById("result-message");
+        const nextQuestion = document.getElementById("next-button")
         
         var quiz = document.getElementById("quiz-form");
         quiz.addEventListener("submit", formSubmission);
@@ -49,6 +51,10 @@
                 alert('Please select an answer.');
             }
         }
+
+        nextQuestion.addEventListener("click", () => {
+            location.reload();
+        });
     </script>
 
 {% endblock %}
