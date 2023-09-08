@@ -21,9 +21,12 @@
         {% endfor %}
         <input type="submit" value="Submit">
     </form>
-    
+    <div id = "result-message"> 
+
+    </div>
     <script>
         const correctAnswer = "{{ current_weather.country }}";
+        const resultMessage = document.getElementById("result-message");
         
         var quiz = document.getElementById("quiz-form");
         quiz.addEventListener("submit", formSubmission);
@@ -36,9 +39,11 @@
                 const userAnswer = selectedAnswer.value;
 
                 if (userAnswer === correctAnswer) {
-                    alert('Correct! You guessed the right country.');
+                    resultMessage.textContent = "Awesome! You selected the correct country."
+                    resultMessage.style.color = 'green';
                 } else {
-                    alert(`Incorrect :(. The correct answer is ${correctAnswer}.`);
+                    resultMessage.textContent = "Wrong... you'll get the next one!"
+                    resultMessage.style.color = 'red';
                 }
             } else {
                 alert('Please select an answer.');
