@@ -66,3 +66,17 @@ button {
 #data {
     margin-top: 200px
 }
+
+#play-page {
+    text-align: center;
+    font-size: 18px;
+}
+
+#quiz-form {
+    margin-top: 75px;
+}
+
+#next-button {
+    margin-top: 50px;
+    padding: 5px 10px;
+}

@@ -1,30 +1,34 @@
 {% extends "layout.html" %} 
 
 {% block content %}
-    <div id = "data">
-        <h1>Current Weather</h1>
-        <p>Temperature: {{ current_weather.temp }}°C</p>
-        <p>Humidity: {{ current_weather.humidity }}%</p>
-        <p>Sky: {{ current_weather.sky }}</p>
-        <p>Current Time: {{ current_weather.timezone }}</p>
+    <div id = "play-page">
+        <div id = "data">
+            <h1>Current Weather</h1>
+            <p>Temperature: {{ current_weather.temp }}°C</p>
+            <p>Humidity: {{ current_weather.humidity }}%</p>
+            <p>Sky: {{ current_weather.sky }}</p>
+            <p>Current Time: {{ current_weather.timezone }}</p>
+        </div>
+
+        <!-- quiz questions -->
+        <form id = "quiz-form">
+            <h2> So... which country is this weather data from?</h2>
+
+            {% for choice in answers %}
+            <label>
+                <input type = "radio" name = "answer" value = "{{ choice }}">
+                {{ choice }} 
+            </label>
+            {% endfor %}
+            <input type="submit" value="Submit">
+        </form>
+        <div id = "result-message"> 
+
+        </div>
+        <button id = "next-button"> Next Question </button>
     </div>
 
-    <!-- quiz questions -->
-    <form id = "quiz-form">
-        <h2> Which country?</h2>
 
-        {% for choice in answers %}
-        <label>
-            <input type = "radio" name = "answer" value = "{{ choice }}">
-            {{ choice }} 
-        </label>
-        {% endfor %}
-        <input type="submit" value="Submit">
-    </form>
-    <button id = "next-button"> Next Question </button>
-    <div id = "result-message"> 
-
-    </div>
     <script>
         const correctAnswer = "{{ current_weather.country }}";
         const resultMessage = document.getElementById("result-message");
